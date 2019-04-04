@@ -34,3 +34,14 @@ class TestUser(unittest.TestCase):
         self.assertEqual(len(User.user_list),1)
 
 
+    def test_save_multiple_users(self):
+        """
+        test_save_multiple_contact to check of we can save muliple 
+        contact objects to our contact
+        """
+        self.new_user.save_user()
+        test_user= Contact("Tes","User","0721345678","test@mail.com")
+        test_user.save_user()
+        self.assertEqual(len(User.user_list),2)
+
+
