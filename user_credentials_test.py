@@ -2,6 +2,7 @@
 
 import unittest  # importing the unit test model
 from user_credentials import User, Credentials 
+import pyperclip
 
 class TestUser(unittest.TestCase):
 
@@ -63,24 +64,24 @@ class TestUser(unittest.TestCase):
         self.new_user.delete_user()
         self.assertEqual(len(User.users_list),1)
         
-    # def test_user_exists(self):
-    #     """
-    #     test_user_exists test case to test if the user exists in the
-    #     list of users.
-    #     """
-    #     self.new_user = User("Gabriel","Oduori","gabriel.oduori@gmail.com", "password4me")# create contact object
-    #     self.new_user.save_user()
-    #     user_exists = User.user_exists("gabriel.oduori@gmail.com")
-    #     self.assertTrue(user_exists)
+    def test_user_exists(self):
+        """
+        test_user_exists test case to test if the user exists in the
+        list of users.
+        """
+        self.new_user = User("Gabriel","Oduori","gabriel.oduori@gmail.com", "password4me")# create contact object
+        self.new_user.save_user()
+        user_exists = User.user_exists("gabriel.oduori@gmail.com")
+        self.assertTrue(user_exists)
         
-    # def test_password_exists(self):
-    #     """
-    #     test_password_exists checks if the password exists for login purposes
-    #     """
-    #     self.new_user = User("Gabriel","Oduori","gabriel.oduori@gmail.com", "password4me")# create contact object
-    #     self.new_user.save_user()
-    #     true_password = User.authenticate_password("password4me")
-    #     self.assertTrue(true_password)
+    def test_authenticate_password(self):
+        """
+        test_authenticate_password checks if the password exists for login purposes
+        """
+        self.new_user = User("Gabriel","Oduori","gabriel.oduori@gmail.com", "password4me")# create contact object
+        self.new_user.save_user()
+        true_password = User.authenticate_password("password4me")
+        self.assertTrue(true_password)
 
         
 class TestCredentials(unittest.TestCase):
@@ -158,17 +159,34 @@ class TestCredentials(unittest.TestCase):
         self.assertEqual(len(Credentials.credentials_list), 1)
         
 
-    # def test_display_credentials(self):
-    #     """
-    #     test_display_credentials checks if the display credential method
-    #     is displaying the data correctly
-    #     """
-    #     self.new_credential.save_credentials()
-    #     Twitter_credential = Credentials('Twitter','goduori','tWitTer_pass')
-    #     Twitter_credential.save_credentials()
-    #     FaceBook_credential = Credentials('Facebook','gabriel.oduori','pswdF200')
-    #     FaceBook_credential.save_credentials()
-    #     self.assertEqual(len(Credentials.display_credentials(Twitter_credential.site_name)),2)
+    def test_display_credentials(self):
+        """
+        test_display_credentials checks if the display credential method
+        is displaying the data correctly
+        """
+        self.new_credential.save_credentials()
+        Twitter_credential = Credentials('Twitter','goduori','tWitTer_pass')
+        Twitter_credential.save_credentials()
+        
+        FaceBook_credential = Credentials('Facebook','gabriel.oduori','pswdF200')
+        FaceBook_credential.save_credentials()
+        
+        self.assertEqual(len(Credentials.display_credentials(Twitter_credential)),2)
+        
+        
+    def test_copy_password(self):
+        """
+        test_copy_password test to confirm that the user can copy a password for 
+        a given website
+        """
+        self.new_credential.save_credentials()
+        copy_credentials = Credentials('Facebook','gabriel.oduori','pswdF200')
+        copy_credentials.save_credentials()
+        Credentials.copy_password("Facebook")
+        self.assertEqual(self.new_credential.site_password,pyperclip.paste())
+        
+        
+ 
 
 
 

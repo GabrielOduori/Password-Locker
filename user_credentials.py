@@ -1,6 +1,7 @@
 # Creating the required classes for the application
 import random
 import string
+import pyperclip
 
 # Global Variables
 # global users_list
@@ -37,24 +38,27 @@ class User:
         """
         User.users_list.remove(self)
         
-    # def user_exists(self,cls, user_email):
-    #     """
-    #     user_exists method checks if a user with the email provided 
-    #     already exists in the users_list
-    #     """
-    #     for email in cls.users_list:
-    #         if user_email.user_email == user_email:
-    #             return True
-    #         return False
+    @classmethod    
+    def user_exists(cls, user_email):
+        """
+        user_exists method checks if a user with the email provided 
+        already exists in the users_list
+        """
+        for email in cls.users_list:
+            if email.user_email == user_email:
+                return True
+            return False
         
-    # def authenticate_password(self,cls,user_password):
-    #     """
-    #     authenticate_password method authenticates users password
-    #     """
-    #     for password in cls.users_list:
-    #         if password.user_password==user_password:
-    #             return True
-    #         return False
+    @classmethod
+    def authenticate_password(cls,user_password):
+        """
+        authenticate_password method checks if a user's password is
+        legit
+        """
+        for password in cls.users_list:
+            if password.user_password==user_password:
+                return True
+            return False
         
         
 1
@@ -68,6 +72,7 @@ class Credentials:
     """
 
     credentials_list = [] # Empty list of credentials
+    user_credentials_list = []
     
     def __init__(self, site_name, site_username, site_password):
         self.site_name = site_name
@@ -100,26 +105,58 @@ class Credentials:
 #                 current_user = user.first_name
 #         return current_user
 
-#     def generate_password(self, size=10, char=string.ascii_uppercase+string.ascii_lowercase+string.digits):
-#         """
-#         generate_password helps in generating password for the user if the option is choosen
+
+
+    @classmethod
+    def display_credentials(cls,site_username):
+
+        """
+        display_credentials method displays the list of already saved credentials
+        """
+        user_credentials_list = []
+        for credential in cls.credentials_list:
+            if credential.site_username == site_username:
+                user_credentials_list.append(credential)
+        return user_credentials_list
+    
+    
+    def generate_password(self, size=10, char=string.ascii_uppercase+string.ascii_lowercase+string.digits):
+        """
+        generate_password helps in generating password for the user if the option is choosen
         
-#         """
-#         generated_pass = ''.join(random.choice(char)for _ in range(size))
-#         return generated_pass
-
-    # @classmethod
-    # def display_credentials(cls):
-
-    #     """
-    #     display_credentials method displays the list of already saved credentials
-    #     """
-    #     # user_credentials_list = []
-    #     # for credential in cls.credentials_list:
-    #     #     if credential.user_email == user_email:
-    #     #         user_credentials_list.append(credential)
-    #     # return user_credentials_list
-    #     return cls.credentials_list(cls)
+        """
+        generated_pass = ''.join(random.choice(char)for _ in range(size))
+        return generated_pass
+    
+    
+    @classmethod
+    def find_by_website(cls,site_name):
+        """
+        find_by_website method returns credentials saved by website
+        """
+        for credential in cls.credentials_list:
+            if credential.site_name ==site_name:
+                return credential
+    
+    
+    @classmethod
+    def copy_password(cls,site_name):
+        """
+        copy_password method hels user copy the auto-generated password for a 
+        specific website
+        """
+        credential_found = Credentials.find_by_website(site_name)
+        return pyperclip.copy(credential_found.site_password)
+        
+        
+    
+    
+    
+   
+        
+    
+    
+    
 
 
 
