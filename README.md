@@ -1,5 +1,6 @@
 # Password-Locker
 Application for managing user passwords
+### Author : Gabriel Oduori
 
 
 ## Description of the project
@@ -33,8 +34,6 @@ Requirements inluded in the requirements.txt file
 ## Technologies used
 
 Python 3.7
-
-## Authors, 
 
 ## License information
 

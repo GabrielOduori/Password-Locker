@@ -72,7 +72,7 @@ class Credentials:
     def __init__(self, site_name, site_username, site_password):
         self.site_name = site_name
         self.site_username = site_username
-        self.user_password = site_password
+        self.site_password = site_password
         
 
     def save_credentials(self):
@@ -81,6 +81,15 @@ class Credentials:
         credentials
         """
         Credentials.credentials_list.append(self)
+        
+        
+    def delete_credentials(self):
+        '''
+        delete_credential method deletes a saved credential from a
+        user credential list
+        '''
+        Credentials.credentials_list.remove(self)
+
         
         
 #     @classmethod
@@ -113,12 +122,6 @@ class Credentials:
     #     return cls.credentials_list(cls)
 
 
-# def delete_credential(self):
-#     '''
-#     delete_credential method deletes a saved credential from a
-#     user credential list
-#     '''
-#     Credentials.credentials_list.remove()
 
 
 

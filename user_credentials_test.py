@@ -116,7 +116,7 @@ class TestCredentials(unittest.TestCase):
         """
         self.assertEqual(self.new_credential.site_name,'Twitter')
         self.assertEqual(self.new_credential.site_username,'goduori')
-        # self.assertEqual(self.new_credential.site_password,'tWitTer_pass')
+        self.assertEqual(self.new_credential.site_password,'tWitTer_pass')
 
 
     def test_save_credentials(self):
@@ -128,13 +128,35 @@ class TestCredentials(unittest.TestCase):
         twitter = Credentials("Twitter","goduori","tWitTer_pass")
         twitter.save_credentials()
         self.assertEqual(len(Credentials.credentials_list),2)
-
+    
     def tearDown(self):
         """
         This cleans up while after running the tests
         """
         Credentials.credentials_list=[]
-        User.users_list=[]
+    
+    def test_save_multiple_credentials(self):
+        """
+        test_save_multiple_users check if we can save multiple credential
+        objects to our user_list
+        """
+        self.new_credential.save_credentials()
+        test_credential= Credentials("Twitter","goduori","tWitTer_pass")
+        test_credential.save_credentials()
+        self.assertEqual(len(Credentials.credentials_list),2)
+        
+        
+    def test_delete_credentials(self):
+        """
+        test_delete_credentials checks if we can remove a credential from 
+        the credential list
+        """
+        self.new_credential.save_credentials()
+        test_credential = Credentials('Twitter', 'goduori','tWitTer_pass')
+        test_credential.save_credentials()
+        self.new_credential.delete_credentials()
+        self.assertEqual(len(Credentials.credentials_list), 1)
+        
 
     # def test_display_credentials(self):
     #     """
@@ -148,16 +170,7 @@ class TestCredentials(unittest.TestCase):
     #     FaceBook_credential.save_credentials()
     #     self.assertEqual(len(Credentials.display_credentials(Twitter_credential.site_name)),2)
 
-    # def test_delete_credentials(self):
-    #     """
-    #     test_delete_credentials checks if we can remove a credential from the credential list
-    #     """
-    #     self.new_credential.save_credentials()
-    #     test_credential = Credentials('Twitter', 'goduori','tWitTer_pass')
-    #     test_credential.save_credentials()
-    #     self.new_credential.save_credentials()
-    #     self.assertEqual(len(Credentials.credentials_list), 1)
-        
+
 
 if __name__ =='__main__':
     unittest.main()
