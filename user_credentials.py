@@ -12,7 +12,7 @@ class User:
     A class that generates new User
     first_name: New contact first name.
     last_name : New contact last name.
-    email_address: New contact phone number.
+    user_email: New contact phone number.
     user_password : New contact email address.
     """
 
@@ -94,16 +94,15 @@ class Credentials:
         user credential list
         '''
         Credentials.credentials_list.remove(self)
-
         
         
-#     @classmethod
-#     def check_current_user(cls, user_email):
-#         current_user = ""
-#         for user in User.users_list:
-#             if user.user_email == user_email and user.user_password == password:
-#                 current_user = user.first_name
-#         return current_user
+    @classmethod    
+    def authenticate_user(cls,user_email):
+        """
+        authenticate_user method checks if user exists and that have 
+        a valid password
+        """
+        pass
 
 
 
@@ -140,13 +139,14 @@ class Credentials:
     
     
     @classmethod
-    def copy_password(cls,site_name):
+    def copy_credential(cls,site_name):
         """
         copy_password method hels user copy the auto-generated password for a 
         specific website
         """
         credential_found = Credentials.find_by_website(site_name)
         return pyperclip.copy(credential_found.site_password)
+
         
         
     
