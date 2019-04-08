@@ -2,7 +2,6 @@
 Application for managing user passwords
 ### Author : Gabriel Oduori
 
-
 ## Description of the project
 On Average, a person has at least 7 different accounts that they can sign into, be it email, social media, entertainment or job portal accounts. It becomes really difficult to remember all those passwords and even create new ones.  This application help us manage our passwords and even generate new passwords on request.
 
@@ -36,6 +35,12 @@ Requirements inluded in the requirements.txt file
 Python 3.7
 
 ## License information
+
+GitHub Search is Copyright 2019 Gabriel ODUORI.
+
+Password Locker is a free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. GitHub Search is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GitHub Search. If not, see http://www.gnu.org/licenses.
 
 ## Contact
 
