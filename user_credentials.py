@@ -66,6 +66,7 @@ class User:
 class Credentials:
     """ 
     A class that generates new Credentials as follows:
+    cred_username:Credential username
     site_name: New contact first name.
     site_username: Username used e.g Twitter handler
     site_password : Password for login into the site.
@@ -104,42 +105,41 @@ class Credentials:
         """
         pass
 
-
-
     @classmethod
-    def display_credentials(cls,site_username):
+    def display_credentials(cls):
 
         """
         display_credentials method displays the list of already saved credentials
-        """
-        user_credentials_list = []
-        for credential in cls.credentials_list:
-            if credential.site_username == site_username:
-                user_credentials_list.append(credential)
-        return user_credentials_list
+        # """
+        return cls.user_credentials_list
+        # user_credentials_list = []
+        # for credential in cls.credentials_list:
+        #     if credential.cred_username == cred_username:
+        #         user_credentials_list.append(credential)
+        # return user_credentials_list
     
     
-    def generate_password(self, size=10, char=string.ascii_uppercase+string.ascii_lowercase+string.digits):
-        """
-        generate_password helps in generating password for the user if the option is choosen
+    # def generate_password(self, size=10, char=string.ascii_uppercase+string.ascii_lowercase+string.digits):
+    #     """
+    #     generate_password helps in generating password for the user if the option is choosen
         
-        """
-        generated_pass = ''.join(random.choice(char)for _ in range(size))
-        return generated_pass
+    #     """
+    #     generated_pass = ''.join(random.choice(char)for _ in range(size))
+    #     return generated_pass
+    
+    
+    # @classmethod
+    # def find_by_website(cls,site_name):
+    #     """
+    #     find_by_website method returns credentials saved by website
+    #     """
+    #     for credential in cls.credentials_list:
+    #         if credential.site_name ==site_name:
+    #             return credential
     
     
     @classmethod
-    def find_by_website(cls,site_name):
-        """
-        find_by_website method returns credentials saved by website
-        """
-        for credential in cls.credentials_list:
-            if credential.site_name ==site_name:
-                return credential
-    
-    
-    @classmethod
-    def copy_credential(cls,site_name):
+    def copy_credentials(cls,site_name):
         """
         copy_password method hels user copy the auto-generated password for a 
         specific website

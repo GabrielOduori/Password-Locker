@@ -51,8 +51,8 @@ def main():
     print("+++++++++++++++ Welcome to your Password Locker ++++++++++++++++")
     print("Please use the follwing shortcodes to:")
     print("1. CRT - to Create a user account")
-    print("1. LOG - to Create a user account")
-    print("1. EXT - to Create a user account")
+    print("2. LOG - to Log into an exisitng user account")
+    print("3. EXT - to Exit the application")
 
     while True:
         short_code = input().upper()
@@ -82,9 +82,7 @@ def main():
                 print("")
                 print(f"New Account created for {first_name}.")
                 print("")
-                print(f"{first_name}, proceed to create and save your credentials")
-
-
+                print(f"{first_name}, Hit the RETURN key proceed to login and create/view your credentials")
 
         elif short_code=="LOG":
             
@@ -97,18 +95,17 @@ def main():
             while True:
                 print("")
                 print(f"Welcome {first_name}. Please choose an option to continue")
-                print("Your options are as follows:")
-                print("CR: Create Credentials")
-                print("DC: Display Credentials")
-                print("CP: Copy Credentials")
-                print("EX:Exit Credential Phase")
+                print("1. CR: Create new credentials")
+                print("2. DC: Display saved redentials")
+                print("3. CP: Copy Credentials")
+                print("4. EX:Exit Credential Phase")
 
                 credential_choice = input().upper()
                 if credential_choice == 'CR':
                     # Create a new credential
                     site_name = input("Enter Site Name:").strip()
                     site_username = input("Enter Username:").strip()
-                    print("Pasword: Woudld you like to auto generate a password?. Y - Yes, N - No")
+                    print("Pasword: Would you like to auto generate a password?. Y - Yes, N - No")
                     pass_choice = input().upper()
                     
                     if pass_choice=='N':
@@ -127,9 +124,15 @@ def main():
                     
                 elif credential_choice == 'DC': 
                     # Display credentials
-                    print("")
-                    for credential in display_credentials(user_email):
-                        print(f"Site Name: {credential.site_name} - Account Name: {credential.account_name} - Password: {credential.password}")	
+                    if display_credentials(user_email):
+                        print("Here is a list of your credentials")
+                        print("")
+                        for credential in display_credentials(site_username):
+                            print(f"Site Name: {credential.site_name} - Account Name: {credential.site_username} - Password: {credential.site_password}")	
+                        else:
+                            print("")
+                            print("You currently do not have any credentials saved")
+                            print("")
                     
                 elif credential_choice == 'CP': 
                     print("")
@@ -140,7 +143,7 @@ def main():
                 elif credential_choice=='EX':
                     print("")
                     print("You are going back to the main user page")
-                    break
+                    # break
                     
                     
                 else:
@@ -156,7 +159,10 @@ def main():
                 break
 
         else:
-            print("Please chose an appropriate code, CRT, LOG and EXT")
+            print("Please chose an appropriate code:")
+            print("1. CRT - to Create a user account")
+            print("2. LOG - to Log into an exisitng user account")
+            print("3. EXT - to Exit the application")
 
 
 if __name__ =="__main__":

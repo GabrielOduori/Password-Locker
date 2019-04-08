@@ -185,10 +185,6 @@ class TestCredentials(unittest.TestCase):
         Credentials.copy_password("Facebook")
         self.assertEqual(self.new_credential.site_password,pyperclip.paste())
         
-        
- 
-
-
 
 if __name__ =='__main__':
     unittest.main()
