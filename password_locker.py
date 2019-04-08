@@ -59,30 +59,31 @@ def main():
         print("\n")
         print("\n")
         
-        
-        
         if short_code=='CRT':
-            
-            print("Create a new Password Locker Acount")
-            first_name = input("Enter First Name:").strip()
-            last_name = input("Enter Last Name:").strip()
-            user_email = input("Enter Email Address:").strip()
-            user_password = input("Enter Password:")
-            repeat_password = input("Repeat Password:")
-            
-            
-            while user_password!=repeat_password:
-                print("")
-                print("The passwords did not macth. Please re-enter the password")
-                user_password=input("Enter Password:").strip()
-                repeat_password = input("Repeat Password:").strip()
-            else:
+            while True:
+                print("Create a new Password Locker Acount")
+                first_name = input("Enter First Name:").strip()
+                last_name = input("Enter Last Name:").strip()
+                user_email = input("Enter Email Address:").strip()
+                user_password = input("Enter Password:")
+                # repeat_password = input("Repeat Password:")
                 
-                save_user(create_user(first_name,last_name,user_email,user_password))
-                print("")
-                print(f"New Account created for {first_name}.")
-                print("")
-                print(f"{first_name}, Hit the RETURN key proceed to login and create/view your credentials")
+                # while user_password!=repeat_password:
+                #     print("")
+                #     print("The passwords did not macth. Please re-enter the password")
+                #     user_password=input("Enter Password:").strip()
+                #     repeat_password = input("Repeat Password:").strip()
+                    
+                if first_name == "" or last_name == "" or user_email == "" or user_password == "":
+                    print("Please fill in all the required fields")
+                    
+                else:
+                    save_user(create_user(first_name,last_name,user_email,user_password))    
+                    print("")
+                    print(f"New Account created for {first_name}.")
+                    print("")
+                    print(f"{first_name}, Hit the RETURN key proceed to login and create/view your credentials")
+                    break
 
         elif short_code=="LOG":
             
@@ -102,24 +103,30 @@ def main():
 
                 credential_choice = input().upper()
                 if credential_choice == 'CR':
-                    # Create a new credential
-                    site_name = input("Enter Site Name:").strip()
-                    site_username = input("Enter Username:").strip()
-                    print("Pasword: Would you like to auto generate a password?. Y - Yes, N - No")
-                    pass_choice = input().upper()
-                    
-                    if pass_choice=='N':
-                        site_password = input("Enter site password:")
-                    
-                    elif pass_choice=='Y':
-                        print("Generating password")
-                        mixed_text = "423223zxcvb123456nmasdfgh3214jkqwertyu"
-                        site_password = "".join(random.choice(mixed_text) for _ in range(10))
-                        print("\n")
-                        print("Generated passwors is {site_password}.")
+                    while True:
                         
-                    save_credential(create_credentials(site_name,site_username,site_password))
-                    print(f"Credential Created: Site Name: {site_name} - UserName: {site_username} - Password: {site_password}")
+                        # Create a new credential
+                        site_name = input("Enter Site Name:").strip()
+                        site_username = input("Enter Username:").strip()
+                        print("Pasword: Would you like to auto generate a password?. Y - Yes, N - No")
+                        pass_choice = input().upper()
+                    
+                    
+                        if pass_choice=='N':
+                            site_password = input("Enter site password:")
+                    
+                        elif pass_choice=='Y':
+                            print("Generating password")
+                            mixed_text = "423223zxcvb123456nmasdfgh3214jkqwertyu"
+                            site_password = "".join(random.choice(mixed_text) for _ in range(10))
+                            print("\n")
+                            print("Generated passwors is {site_password}.")
+                            
+                        if site_name=="" or site_username=="" or site_password=="":
+                            print("You have blank entries")
+                        else:
+                            save_credential(create_credentials(site_name,site_username,site_password))
+                            print(f"Credential Created: Site Name: {site_name} - UserName: {site_username} - Password: {site_password}")
                     
                     
                 elif credential_choice == 'DC': 
